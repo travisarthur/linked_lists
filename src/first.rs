@@ -53,8 +53,8 @@ impl List {
 
 impl Default for List {
     fn default() -> Self {
-        Self::new()        
-    }    
+        Self::new()
+    }
 }
 
 impl<'a> Iterator for ListIterator<'a> {
@@ -71,3 +71,27 @@ impl<'a> Iterator for ListIterator<'a> {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::List;
+    #[test]
+    fn basics() {
+        let mut list = List::new();
+
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        assert_eq!(list.pop(), Some(3));
+        assert_eq!(list.pop(), Some(2));
+
+        list.push(4);
+        list.push(5);
+
+        assert_eq!(list.pop(), Some(5));
+        assert_eq!(list.pop(), Some(4));
+
+        assert_eq!(list.pop(), Some(1));
+        assert_eq!(list.pop(), None);
+    }
+}
